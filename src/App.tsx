@@ -1,3 +1,4 @@
+import { SessionsWorkspace } from './features/training-sessions/SessionsWorkspace.tsx'
 import './App.css'
 
 function App() {
@@ -7,7 +8,9 @@ function App() {
         <h1>Training sessions</h1>
         <p>View, filter, and create your training sessions.</p>
       </header>
-      <main className="app-main"></main>
+      <main className="app-main">
+        <SessionsWorkspace />
+      </main>
     </>
   )
 }

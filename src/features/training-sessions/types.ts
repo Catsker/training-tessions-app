@@ -12,6 +12,9 @@ export function isSessionStatus(value: unknown): value is SessionStatus {
   return SESSION_STATUSES.some((status) => status === value)
 }
 
+/** Value of the status filter: one status, or every session. */
+export type StatusFilterValue = SessionStatus | 'all'
+
 export interface Session {
   id: string
   title: string

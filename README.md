@@ -22,6 +22,16 @@ Open the URL that Vite prints in the terminal.
 | `npm run build` | Type-check (`tsc -b`) and build for production |
 | `npm run lint` | Run ESLint |
 | `npm run preview` | Serve the production build locally |
+| `npm test` | Run behaviour tests (Vitest + Testing Library; API mocked with MSW) |
+
+## Mock API
+
+There is no backend: [MSW](https://mswjs.io/) serves `GET` and `POST /api/sessions` in every mode
+(dev, preview, and production builds). The handlers live in `src/mocks/`. Data is kept in memory,
+so created sessions disappear when the page reloads.
+
+To check the error state, open the app with `?mockError=list`. The first sessions request then
+fails, and **Retry** loads the list.
 
 ## Task documentation
 

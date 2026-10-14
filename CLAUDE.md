@@ -15,9 +15,10 @@ Success = a controlled, verified workflow, not a production-ready application.
 - Application Root: repository root (single frontend app).
 - Stack: React 19, TypeScript ~6, Vite 8, React Compiler (Babel preset), ESLint 10 flat config.
 - Package manager: npm (`package-lock.json`).
-- Scripts: `npm run dev`, `npm run build` (`tsc -b && vite build`), `npm run lint`, `npm run preview`.
-- Not installed yet: test runner, Testing Library, MSW / HTTP mock, HTTP client, router, state library.
-- `src/App.tsx` is the Vite starter; replacing its content with the workspace is in scope.
+- Scripts: `npm run dev`, `npm run build` (`tsc -b && vite build`), `npm run lint`, `npm run preview`, `npm test` (`vitest run`).
+- Installed: MSW 2.15 (mock API in `src/mocks/`, worker `public/mockServiceWorker.js`); Vitest 4.1, Testing Library and jsdom (setup in `src/test/`).
+- Not installed: HTTP client, router, state library.
+- Feature code lives in `src/features/training-sessions/`; `src/App.tsx` renders the workspace.
 - Runtime Doctor result recorded in `workflow-log.md`: `DEGRADED`, hook `ACTIVE`, no blocking effect.
 
 ## Required User Flow
@@ -87,6 +88,6 @@ tasks/TASK-001/
 
 - App starts with `npm run dev`; list -> filter -> create works end to end.
 - Loading and recoverable error states implemented.
-- Behavior-level test exists and passes; `npm run lint` and `npm run build` results reported.
+- Behavior-level tests pass with `npm test`; `npm run lint` and `npm run build` results reported.
 - Review findings considered; happy-path blockers fixed or recorded.
 - One real manual browser observation recorded; known limitations listed honestly.
