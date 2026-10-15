@@ -1,78 +1,39 @@
-# React + TypeScript + Vite
+# Training Sessions
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small frontend workspace where a trainer can view, filter, and create training sessions.
+Sessions come from a mock API; there is no backend service.
 
-Currently, two official plugins are available:
+Built with React 19, TypeScript, and Vite (React Compiler enabled).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting started
 
-## React Compiler
-
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
-
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Open the URL that Vite prints in the terminal.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Scripts
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Type-check (`tsc -b`) and build for production |
+| `npm run lint` | Run ESLint |
+| `npm run preview` | Serve the production build locally |
+| `npm test` | Run behaviour tests (Vitest + Testing Library; API mocked with MSW) |
 
-```
+## Mock API
+
+There is no backend: [MSW](https://mswjs.io/) serves `GET` and `POST /api/sessions` in every mode
+(dev, preview, and production builds). The handlers live in `src/mocks/`. Data is kept in memory,
+so created sessions disappear when the page reloads.
+
+To check the error state, open the app with `?mockError=list`. The first sessions request then
+fails, and **Retry** loads the list.
+
+## Task documentation
+
+Requirements, implementation plan, and workflow log for this feature live in
+[`tasks/TASK-001/`](tasks/TASK-001/). Agent instructions are in [`CLAUDE.md`](CLAUDE.md).
